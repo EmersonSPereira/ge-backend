@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    <changeSet id="20201024155500-1" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB_ENDERECO">
+            <column name="CO_ENDERECO" type="bigint" remarks="" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="DS_NUMERO" type="varchar(10)" remarks="Número do endereço">
+                <constraints nullable="true" />
+            </column>
+            <column name="DS_RUA" type="varchar(400)" remarks="Rua do endereço">
+                <constraints nullable="false" />
+            </column>
+           <column name="DS_BAIRRO" type="varchar(200)" remarks="Bairro do endereço">
+				<constraints nullable="false"  />
+			</column>
+           <column name="DS_CIDADE" type="varchar(200)" remarks="Cidade do endereço">
+				<constraints nullable="false"  />
+			</column>
+           <column name="DS_ESTADO" type="varchar(200)" remarks="Estado do endereço">
+				<constraints nullable="false"  />
+		  </column>
+           <column name="DS_CEP" type="varchar(9)" remarks="CEP do endereço">
+				<constraints nullable="false"  />
+		  </column>
+		  
+        </createTable>
+    </changeSet>
+    <changeSet id="20201024155500-2" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB_FUNCIONARIO">
+            <column name="CO_FUNCIONARIO" type="bigint" autoIncrement="${autoIncrement}" remarks="Id do funcionário">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="NO_FUNCIONARIO" type="varchar(200)" remarks="Nome do funcionário">
+                <constraints nullable="false" />
+            </column>
+           <column name="CO_ENDERECO" type="bigint" remarks="Id do endereço do funcionário">
+				<constraints nullable="false" foreignKeyName="FK_FUNCIONARIO_ENDERECO" 
+    			referencedTableName="TB_ENDERECO" referencedColumnNames="CO_ENDERECO" />
+			</column>
+        </createTable>
+    </changeSet>
+    <changeSet id="20201024155500-3" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB_TELEFONE">
+            <column name="CO_TELEFONE" type="bigint" autoIncrement="${autoIncrement}" remarks="Id do telefone">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="DS_TELEFONE" type="varchar(11)" remarks="Número do telefone">
+                <constraints nullable="false" />
+            </column>
+           <column name="TIPO_TELEFONE" type="varchar(7)" remarks="Tipo do telefone fixo ou celular">
+				<constraints nullable="false" />
+			</column>
+           <column name="CO_FUNCIONARIO" type="bigint" remarks="Id do funcionário dono do telefone">
+				<constraints nullable="true" foreignKeyName="FK_FUNCIONARIO_TELEFONE" 
+    			referencedTableName="TB_FUNCIONARIO" referencedColumnNames="CO_FUNCIONARIO" />
+			</column>
+        </createTable>
+    </changeSet>
+      
+    <changeSet id="20201024155500-4" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence sequenceName="SQ_ENDERECO" startValue="1"/>
+    </changeSet>
+    <changeSet id="20201024155500-5" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence sequenceName="SQ_FUNCIONARIO" startValue="1"/>
+    </changeSet>
+    <changeSet id="20201024155500-6" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence sequenceName="SQ_TELEFONE" startValue="1"/>
+    </changeSet>
+    
+      <changeSet id="20201024155500-7" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <sql>
+            ALTER TABLE "TB_TELEFONE" ADD CONSTRAINT CK_TB_TELEFONE_NO_TIPO_TELEFONE 
+            CHECK ("TIPO_TELEFONE" 
+            in ('FIXO','CELULAR'));
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
