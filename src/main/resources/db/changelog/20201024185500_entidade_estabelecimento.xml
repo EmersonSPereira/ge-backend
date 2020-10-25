@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+   
+    <changeSet id="20201024185500-1" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB_ESTABELECIMENTO">
+            <column name="CO_ESTABELECIMENTO" type="bigint" autoIncrement="${autoIncrement}" remarks="Id do estabelecimento">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="NO_ESTABELECIMENTO" type="varchar(200)" remarks="Nome do estabelecimento">
+                <constraints nullable="false" />
+            </column>
+           <column name="CO_ENDERECO" type="bigint" remarks="Id do endereço do estabelecimento">
+				<constraints nullable="false" foreignKeyName="FK_ESTABELECIMENTO_ENDERECO" 
+    			referencedTableName="TB_ENDERECO" referencedColumnNames="CO_ENDERECO" />
+			</column>
+           <column name="CO_TELEFONE" type="bigint" remarks="Id do endereço do estabelecimento">
+				<constraints nullable="false" foreignKeyName="FK_ESTABELECIMENTO_TELEFONE" 
+    			referencedTableName="TB_TELEFONE" referencedColumnNames="CO_TELEFONE" />
+			</column>
+        </createTable>
+    </changeSet>   
+    <changeSet id="20201024185500-2" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence sequenceName="SQ_ESTABELECIMENTO" startValue="1"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    
+    <changeSet id="20201024251500-1" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TB_PROFISSIONAL">
+            <column name="CO_PROFISSIONAL" type="bigint" autoIncrement="${autoIncrement}" remarks="Id do profissional">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="NO_PROFISSIONAL" type="varchar(200)" remarks="Nome do profissional">
+                <constraints nullable="false" />
+            </column>
+           <column name="CO_ENDERECO" type="bigint" remarks="Id do endereço do profissional">
+				<constraints nullable="false" foreignKeyName="FK_PROFISSIONAL_ENDERECO" 
+    			referencedTableName="TB_ENDERECO" referencedColumnNames="CO_ENDERECO" />
+			</column>
+			<column name="CO_ESTABELECIMENTO" type="bigint" remarks="Id do estabelecimento ao qual o profissional está alocado">
+				<constraints nullable="true" foreignKeyName="FK_PROFISSIONAL_ESTABELECIMENTO" 
+    			referencedTableName="TB_ESTABELECIMENTO" referencedColumnNames="CO_ESTABELECIMENTO" />
+			</column>
+        </createTable>
+    </changeSet>
+    
+   
+    <changeSet id="20201024251500-2" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence sequenceName="SQ_PROFISSIONAL" startValue="1"/>
+    </changeSet>
+    
+    <changeSet id="20201024251500-3" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+         <addColumn tableName="TB_TELEFONE" >
+			<column name="CO_PROFISSIONAL"  
+				type="bigint" remarks="Id do profissional"> 
+				<constraints nullable="true" foreignKeyName="FK_TELEFONE_USUARIO" 
+    			referencedTableName="TB_PROFISSIONAL" referencedColumnNames="CO_PROFISSIONAL" />
+			</column>
+		</addColumn>
+    </changeSet>
+  
+
+</databaseChangeLog>

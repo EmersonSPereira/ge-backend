@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     
-    <changeSet id="20201024155500-1" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet id="20201024152500-1" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createTable tableName="TB_ENDERECO">
             <column name="CO_ENDERECO" type="bigint" remarks="" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -33,22 +33,8 @@
 		  
         </createTable>
     </changeSet>
-    <changeSet id="20201024155500-2" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TB_FUNCIONARIO">
-            <column name="CO_FUNCIONARIO" type="bigint" autoIncrement="${autoIncrement}" remarks="Id do funcionário">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-
-            <column name="NO_FUNCIONARIO" type="varchar(200)" remarks="Nome do funcionário">
-                <constraints nullable="false" />
-            </column>
-           <column name="CO_ENDERECO" type="bigint" remarks="Id do endereço do funcionário">
-				<constraints nullable="false" foreignKeyName="FK_FUNCIONARIO_ENDERECO" 
-    			referencedTableName="TB_ENDERECO" referencedColumnNames="CO_ENDERECO" />
-			</column>
-        </createTable>
-    </changeSet>
-    <changeSet id="20201024155500-3" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+   
+    <changeSet id="20201024152500-2" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createTable tableName="TB_TELEFONE">
             <column name="CO_TELEFONE" type="bigint" autoIncrement="${autoIncrement}" remarks="Id do telefone">
                 <constraints primaryKey="true" nullable="false"/>
@@ -60,24 +46,17 @@
            <column name="TIPO_TELEFONE" type="varchar(7)" remarks="Tipo do telefone fixo ou celular">
 				<constraints nullable="false" />
 			</column>
-           <column name="CO_FUNCIONARIO" type="bigint" remarks="Id do funcionário dono do telefone">
-				<constraints nullable="true" foreignKeyName="FK_FUNCIONARIO_TELEFONE" 
-    			referencedTableName="TB_FUNCIONARIO" referencedColumnNames="CO_FUNCIONARIO" />
-			</column>
         </createTable>
     </changeSet>
       
-    <changeSet id="20201024155500-4" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet id="20201024152500-3" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createSequence sequenceName="SQ_ENDERECO" startValue="1"/>
-    </changeSet>
-    <changeSet id="20201024155500-5" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence sequenceName="SQ_FUNCIONARIO" startValue="1"/>
-    </changeSet>
-    <changeSet id="20201024155500-6" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    </changeSet> 
+    <changeSet id="20201024152500-4" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createSequence sequenceName="SQ_TELEFONE" startValue="1"/>
     </changeSet>
     
-      <changeSet id="20201024155500-7" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+      <changeSet id="20201024152500-5" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <sql>
             ALTER TABLE "TB_TELEFONE" ADD CONSTRAINT CK_TB_TELEFONE_NO_TIPO_TELEFONE 
             CHECK ("TIPO_TELEFONE" 

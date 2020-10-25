@@ -21,8 +21,8 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("GE - Gerenciador de Estabelecimentos e Funcionários.")
-				.description("API REST para gerenciar funcionários e estabelecimentos").version("1.0.0")
+		return new ApiInfoBuilder().title("GE - Gerenciador de Estabelecimentos e Profissionais.")
+				.description("API REST para gerenciar profissionais e estabelecimentos").version("1.0.0")
 				.license("Apache License Version 2.0").licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
 				.contact(new Contact("Emerson Sousa", "https://www.linkedin.com/in/emersonsousapereira/",
 						"sousap.emerson@gmail.com"))
