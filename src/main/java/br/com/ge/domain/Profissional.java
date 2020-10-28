@@ -1,6 +1,7 @@
 package br.com.ge.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,13 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "TB_PROFISSIONAL")
@@ -35,10 +32,11 @@ public class Profissional implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CO_ENDERECO")
 	private Endereco endereco;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CO_TELEFONE")
+	private Telefone telefone;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "CO_PROFISSIONAL")
-	private List<Telefone> telefones;
 
 	public Long getId() {
 		return id;
@@ -64,16 +62,12 @@ public class Profissional implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public List<Telefone> getTelefones() {
-		return telefones;
+	public Telefone getTelefone() {
+		return telefone;
 	}
 
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setTelefone(Telefone telefone) {
+		this.telefone = telefone;
 	}
 
 	@Override

@@ -20,7 +20,7 @@
 				<constraints nullable="false" foreignKeyName="FK_ESTABELECIMENTO_ENDERECO" 
     			referencedTableName="TB_ENDERECO" referencedColumnNames="CO_ENDERECO" />
 			</column>
-           <column name="CO_TELEFONE" type="bigint" remarks="Id do endereço do estabelecimento">
+           <column name="CO_TELEFONE" type="bigint" remarks="Id do telefone do estabelecimento">
 				<constraints nullable="false" foreignKeyName="FK_ESTABELECIMENTO_TELEFONE" 
     			referencedTableName="TB_TELEFONE" referencedColumnNames="CO_TELEFONE" />
 			</column>

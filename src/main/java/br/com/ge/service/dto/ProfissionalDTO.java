@@ -1,13 +1,9 @@
 package br.com.ge.service.dto;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import br.com.ge.domain.Telefone;
 
 public class ProfissionalDTO implements Serializable {
 	
@@ -22,8 +18,7 @@ public class ProfissionalDTO implements Serializable {
 	private EnderecoDTO endereco;
 
 	@NotNull(message = "telefone celular não pode ser nulo")
-	@Size(min = 2,message = "o profissional deve cadastrar dois telefones")
-	private List<Telefone> telefones;
+	private TelefoneDTO telefone;
 
 
 	public Long getId() {
@@ -50,17 +45,16 @@ public class ProfissionalDTO implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public List<Telefone> getTelefones() {
-		return telefones;
+	public TelefoneDTO getTelefone() {
+		return telefone;
 	}
 
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
+	public void setTelefone(TelefoneDTO telefone) {
+		this.telefone = telefone;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
+	
 
 	
 

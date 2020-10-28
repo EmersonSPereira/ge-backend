@@ -1,19 +1,15 @@
 package br.com.ge.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import br.com.ge.service.enumeration.TipoTelefoneEnum;
-
-import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "TB_TELEFONE")
@@ -27,12 +23,11 @@ public class Telefone implements Serializable {
 	@Column(name = "CO_TELEFONE")
 	private Long id;
 
-	@Column(name = "DS_TELEFONE", nullable = false)
-	private String numeroTelefone;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TIPO_TELEFONE", nullable = false)
-	private TipoTelefoneEnum tipoPermissao;
+	@Column(name = "DS_TELEFONE_FIXO", nullable = false)
+	private String numeroTelefoneFixo;
+	
+	@Column(name = "DS_TELEFONE_CELULAR", nullable = true)
+	private String numeroTelefoneCelular;
 
 	public Long getId() {
 		return id;
@@ -42,20 +37,20 @@ public class Telefone implements Serializable {
 		this.id = id;
 	}
 
-	public String getNumeroTelefone() {
-		return numeroTelefone;
+	public String getNumeroTelefoneFixo() {
+		return numeroTelefoneFixo;
 	}
 
-	public void setNumeroTelefone(String numeroTelefone) {
-		this.numeroTelefone = numeroTelefone;
+	public void setNumeroTelefoneFixo(String numeroTelefoneFixo) {
+		this.numeroTelefoneFixo = numeroTelefoneFixo;
 	}
 
-	public TipoTelefoneEnum getTipoPermissao() {
-		return tipoPermissao;
+	public String getNumeroTelefoneCelular() {
+		return numeroTelefoneCelular;
 	}
 
-	public void setTipoPermissao(TipoTelefoneEnum tipoPermissao) {
-		this.tipoPermissao = tipoPermissao;
+	public void setNumeroTelefoneCelular(String numeroTelefoneCelular) {
+		this.numeroTelefoneCelular = numeroTelefoneCelular;
 	}
 
 	@Override

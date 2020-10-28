@@ -20,6 +20,10 @@
 				<constraints nullable="false" foreignKeyName="FK_PROFISSIONAL_ENDERECO" 
     			referencedTableName="TB_ENDERECO" referencedColumnNames="CO_ENDERECO" />
 			</column>
+			<column name="CO_TELEFONE" type="bigint" remarks="Id do telefone do profissional">
+				<constraints nullable="false" foreignKeyName="FK_PROFISSIONAL_TELEFONE" 
+    			referencedTableName="TB_TELEFONE" referencedColumnNames="CO_TELEFONE" />
+			</column>
 			<column name="CO_ESTABELECIMENTO" type="bigint" remarks="Id do estabelecimento ao qual o profissional está alocado">
 				<constraints nullable="true" foreignKeyName="FK_PROFISSIONAL_ESTABELECIMENTO" 
     			referencedTableName="TB_ESTABELECIMENTO" referencedColumnNames="CO_ESTABELECIMENTO" />
@@ -31,16 +35,5 @@
     <changeSet id="20201024251500-2" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createSequence sequenceName="SQ_PROFISSIONAL" startValue="1"/>
     </changeSet>
-    
-    <changeSet id="20201024251500-3" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-         <addColumn tableName="TB_TELEFONE" >
-			<column name="CO_PROFISSIONAL"  
-				type="bigint" remarks="Id do profissional"> 
-				<constraints nullable="true" foreignKeyName="FK_TELEFONE_USUARIO" 
-    			referencedTableName="TB_PROFISSIONAL" referencedColumnNames="CO_PROFISSIONAL" />
-			</column>
-		</addColumn>
-    </changeSet>
-  
 
 </databaseChangeLog>

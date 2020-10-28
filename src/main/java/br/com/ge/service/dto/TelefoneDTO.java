@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
 
-import br.com.ge.service.enumeration.TipoTelefoneEnum;
-
 public class TelefoneDTO implements Serializable{
 
 	private static final long serialVersionUID = -1451683899045994967L;
@@ -13,10 +11,10 @@ public class TelefoneDTO implements Serializable{
 	private Long id;
 
 	@NotEmpty(message = "número não pode ser vazio")
-	private String numeroTelefone;
-
-	@NotEmpty(message = "o tipo do telefone não pode ser vazio")
-	private TipoTelefoneEnum tipoPermissao;
+	private String numeroTelefoneFixo;
+	
+	@NotEmpty(message = "número não pode ser vazio")
+	private String numeroTelefoneCelular;
 
 	public Long getId() {
 		return id;
@@ -26,20 +24,23 @@ public class TelefoneDTO implements Serializable{
 		this.id = id;
 	}
 
-	public String getNumeroTelefone() {
-		return numeroTelefone;
+	public String getNumeroTelefoneFixo() {
+		return numeroTelefoneFixo;
 	}
 
-	public void setNumeroTelefone(String numeroTelefone) {
-		this.numeroTelefone = numeroTelefone;
+	public void setNumeroTelefoneFixo(String numeroTelefoneFixo) {
+		this.numeroTelefoneFixo = numeroTelefoneFixo;
 	}
 
-	public TipoTelefoneEnum getTipoPermissao() {
-		return tipoPermissao;
+	public String getNumeroTelefoneCelular() {
+		return numeroTelefoneCelular;
 	}
 
-	public void setTipoPermissao(TipoTelefoneEnum tipoPermissao) {
-		this.tipoPermissao = tipoPermissao;
+	public void setNumeroTelefoneCelular(String numeroTelefoneCelular) {
+		this.numeroTelefoneCelular = numeroTelefoneCelular;
 	}
+
+	
+	
 
 }

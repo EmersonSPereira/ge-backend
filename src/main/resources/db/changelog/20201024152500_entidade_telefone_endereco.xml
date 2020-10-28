@@ -40,12 +40,12 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="DS_TELEFONE" type="varchar(11)" remarks="Número do telefone">
+            <column name="DS_TELEFONE_FIXO" type="varchar(11)" remarks="Número do telefone celular">
                 <constraints nullable="false" />
             </column>
-           <column name="TIPO_TELEFONE" type="varchar(7)" remarks="Tipo do telefone fixo ou celular">
-				<constraints nullable="false" />
-			</column>
+            <column name="DS_TELEFONE_CELULAR" type="varchar(11)" remarks="Número do telefone celular">
+                <constraints nullable="false" />
+            </column>
         </createTable>
     </changeSet>
       
@@ -54,14 +54,6 @@
     </changeSet> 
     <changeSet id="20201024152500-4" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createSequence sequenceName="SQ_TELEFONE" startValue="1"/>
-    </changeSet>
-    
-      <changeSet id="20201024152500-5" author="Emerson" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <sql>
-            ALTER TABLE "TB_TELEFONE" ADD CONSTRAINT CK_TB_TELEFONE_NO_TIPO_TELEFONE 
-            CHECK ("TIPO_TELEFONE" 
-            in ('FIXO','CELULAR'));
-        </sql>
     </changeSet>
 
 </databaseChangeLog>
