@@ -1,5 +1,8 @@
 package br.com.ge.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,14 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "TB_ESTABELECIMENTO")
@@ -38,10 +36,6 @@ public class Estabelecimento implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CO_TELEFONE")
 	private Telefone telefone;
-	
-	@OneToMany(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "CO_ESTABELECIMENTO")
-	private List<Profissional> profissionais;
 
 	public Long getId() {
 		return id;
@@ -75,18 +69,6 @@ public class Estabelecimento implements Serializable{
 		this.telefone = telefone;
 	}
 	
-
-	public List<Profissional> getProfissionais() {
-		return profissionais;
-	}
-
-	public void setProfissionais(List<Profissional> profissionais) {
-		this.profissionais = profissionais;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	@Override
 	public boolean equals(final Object other) {

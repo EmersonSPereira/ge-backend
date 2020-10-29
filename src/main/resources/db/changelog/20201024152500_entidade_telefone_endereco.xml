@@ -40,11 +40,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="DS_TELEFONE_FIXO" type="varchar(11)" remarks="Número do telefone celular">
+            <column name="DS_TELEFONE_FIXO" type="varchar(11)" remarks="Número do telefone fixo">
                 <constraints nullable="false" />
             </column>
             <column name="DS_TELEFONE_CELULAR" type="varchar(11)" remarks="Número do telefone celular">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
         </createTable>
     </changeSet>

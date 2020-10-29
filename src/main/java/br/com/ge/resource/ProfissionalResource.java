@@ -1,5 +1,7 @@
 package br.com.ge.resource;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ge.service.ProfissionalService;
+import br.com.ge.service.dto.DominioFixoDTO;
 import br.com.ge.service.dto.ProfissionalDTO;
 import br.com.ge.service.dto.ProfissionalListagemDTO;
 import io.swagger.annotations.ApiOperation;
@@ -34,36 +37,56 @@ public class ProfissionalResource {
 
 	@PostMapping
 	@ApiOperation(value = "Cadastra um profissional na aplicação")
-	public ResponseEntity<Void> cadastrarProfissonal(@RequestBody @Valid ProfissionalDTO profissionalDTO) {
+	public ResponseEntity<Void> cadastrar(@RequestBody @Valid ProfissionalDTO profissionalDTO) {
 		log.debug("Requisição REST para cadastrar o Profissional : {}", profissionalDTO);
-		profissionalService.cadastrarProfissional(profissionalDTO);
+		profissionalService.cadastrar(profissionalDTO);
 		return ResponseEntity.ok().build();
 	}
 
 	@GetMapping()
-	public ResponseEntity<Page<ProfissionalListagemDTO>> listUsuario(@ApiParam Pageable pageable) {
+	public ResponseEntity<Page<ProfissionalListagemDTO>> buscarPaginado(@ApiParam Pageable pageable) {
 		log.debug("Requisição REST para listar os Profissionais paginados");
 		return ResponseEntity.ok(profissionalService.buscarPaginado(pageable));
 	}
 
 	@GetMapping("{id}")
 	public ResponseEntity<ProfissionalDTO> buscarPorId(@PathVariable Long id) {
-		log.debug("REST request to get Usuario : {}", id);
+		log.debug("Requisição REST para buscar o Profissional : {}", id);
 		return ResponseEntity.ok(profissionalService.buscarPorid(id));
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity<Void> atualizarProfissional(@PathVariable Long id, @Valid @RequestBody ProfissionalDTO profissionalDTO) {
+	public ResponseEntity<Void> atualizar(@PathVariable Long id, @Valid @RequestBody ProfissionalDTO profissionalDTO) {
 		log.debug("Requisição REST para editar o Profissional : {}", profissionalDTO);
 		profissionalService.atualizar(profissionalDTO, id);
 		return ResponseEntity.ok().build();
 	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> remover(@PathVariable Long id) {
+		log.debug("Requisição REST para remover o Profissional : {}", id);
+		profissionalService.remover(id);
+		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<DominioFixoDTO>> buscarPorNome(@PathVariable String nome) {
+		log.debug("Requisição REST para buscar o Profissional por nome : {}", nome);
+		return ResponseEntity.ok(profissionalService.buscarPorNome(nome));
+	}
 	
-	 @DeleteMapping("/{id}")
-	    public ResponseEntity<Void> remover(@PathVariable Long id) {
-	        log.debug("REST request to remover o Profissional : {}", id);
-	        profissionalService.remover(id);
-	        return ResponseEntity.ok().build();
-	    }
+	@PostMapping("/{id}/associar/{idEstabelecimento}")
+	@ApiOperation(value = "Associa um profissional a um estabelecimento")
+	public ResponseEntity<Void> associar(@PathVariable Long id, @PathVariable Long idEstabelecimento) {
+		log.debug("Requisição REST para associar o Profissional : {} ao Estbelecimento :{}", id, idEstabelecimento);
+		profissionalService.associar(id, idEstabelecimento);
+		return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping("/estabelecimentos/{id}")
+	public ResponseEntity<Page<ProfissionalListagemDTO>> buscarPorIdEstabeleCimentoPaginado(@PathVariable Long id,@ApiParam Pageable pageable) {
+		log.debug("Requisição REST para listar os Profissionais paginados");
+		return ResponseEntity.ok(profissionalService.buscarPorIdEstabelecimentoPaginado(id,pageable));
+	}
 
 }
