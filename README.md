@@ -12,7 +12,7 @@ Api para gerenciamento de estabelecimento e profissionais.
 
 ### Instalação
 
-1. Criando base de dados Postgres chamada gedb ou vá até a pasta docker na raiz do projeto e execute
+1. Crie uma base de dados Postgres chamada `gedb` ou vá até a pasta docker na raiz do projeto e execute
 
 ```sh
 docker-compose up -d
