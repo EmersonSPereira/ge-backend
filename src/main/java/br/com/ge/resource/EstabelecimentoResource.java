@@ -75,5 +75,11 @@ public class EstabelecimentoResource {
 		log.debug("Requisição REST para buscar o Estabelecimento por nome : {}", nome);
 		return ResponseEntity.ok(profissionalService.buscarPorNome(nome));
 	}
+	
+	@GetMapping("/{id}/verificar-vinculo")
+    public ResponseEntity<Boolean> verificarVinculoComProfissional(@PathVariable Long id) {
+        log.debug("Requisição REST para validar vinculo com Profissional : {}", id);
+        return ResponseEntity.ok(profissionalService.verificarVinculoComProfissional(id));
+    }
 
 }

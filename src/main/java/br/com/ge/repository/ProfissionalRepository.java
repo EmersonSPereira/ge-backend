@@ -22,11 +22,14 @@ public interface ProfissionalRepository extends JpaRepository<Profissional, Long
 	Page<ProfissionalListagemDTO> buscarPaginado(Pageable pageable);
 
 	@Query(value = "SELECT new br.com.ge.service.dto.DominioFixoDTO(p.id,p.nome)"
-			+ " FROM Profissional p WHERE LOWER(p.nome) LIKE lower(concat('%', :nome,'%'))")
+			+ " FROM Profissional p LEFT JOIN p.estabelecimento e WHERE LOWER(p.nome) LIKE lower(concat('%', :nome,'%')) AND e IS NULL")
 	List<DominioFixoDTO> buscarPorNome(@Param("nome") String nome);
 
 	@Query("SELECT new  br.com.ge.service.dto.ProfissionalListagemDTO"
 			+ "(p.id, p.nome,p.telefone.numeroTelefoneFixo, p.telefone.numeroTelefoneFixo.numeroTelefoneCelular)"
 			+ " FROM Profissional p LEFT JOIN p.estabelecimento e WHERE e.id = :idEstabelecimento ORDER BY p.id ASC ")
 	Page<ProfissionalListagemDTO> buscarPorIdEstabelecimentoPaginado(@Param("idEstabelecimento") Long idEstabelecimento, Pageable pageable);
+
+    @Query("SELECT CASE WHEN count(p) > 0 THEN true ELSE false END FROM Profissional p INNER JOIN p.estabelecimento e WHERE e.id = :idEstabelecimento")
+	Boolean existeProfissionalPorIdEstabelecimento(@Param("idEstabelecimento") Long id);
 }

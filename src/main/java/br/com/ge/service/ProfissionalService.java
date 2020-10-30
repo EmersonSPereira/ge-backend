@@ -134,7 +134,25 @@ public class ProfissionalService {
 	 * @param pageable
 	 * @return {@link Page ProfissionalListagemDTO}
 	 */
+	@Transactional(readOnly = true)
 	public Page<ProfissionalListagemDTO> buscarPorIdEstabelecimentoPaginado(Long id, Pageable pageable) {
 		return profissionalRepository.buscarPorIdEstabelecimentoPaginado(id, pageable);
+	}
+
+	/**
+	 * desassocia o profissional da empresa
+	 * @param id
+	 */
+	public void desassociar(Long id) {
+		Profissional profissional = this.profissionalRepository.findById(id)
+				.orElseThrow(() -> new NegocioExeption(ConstantsUtil.MSG_PROFISSIONAL_NAO_ENCONTRADO));
+		
+		profissional.setEstabelecimento(null);
+		
+		this.profissionalRepository.save(profissional);
+	}
+
+	public Boolean existeProfissionalPorIdEstabelecimento(Long id) {
+		return profissionalRepository.existeProfissionalPorIdEstabelecimento(id);
 	}
 }

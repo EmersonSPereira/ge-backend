@@ -25,6 +25,9 @@ public class EstabelecimentoService {
 
 	@Autowired
 	private EstabelecimentoRepository estabelecimentoRepository;
+	
+	@Autowired
+	private ProfissionalService profissionalService;
 
 	@Autowired
 	private EstabelecimentoMapper estabelecimentoMapper;
@@ -101,6 +104,15 @@ public class EstabelecimentoService {
 	public Estabelecimento buscarEstabelecimentoPorId(Long id) {
 		return this.estabelecimentoRepository.findById(id)
 				.orElseThrow(() -> new NegocioExeption(ConstantsUtil.MSG_ESTABELECIMENTO_NAO_ENCONTRADO));
+	}
+
+	/**
+	 * verifica se empresa tem profissionais associados
+	 * @param id
+	 * @return
+	 */
+	public Boolean verificarVinculoComProfissional(Long id) {
+		return profissionalService.existeProfissionalPorIdEstabelecimento(id);
 	}
 
 }

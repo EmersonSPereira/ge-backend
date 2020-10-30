@@ -82,6 +82,13 @@ public class ProfissionalResource {
 		profissionalService.associar(id, idEstabelecimento);
 		return ResponseEntity.ok().build();
 	}
+	@PostMapping("/{id}/desassociar")
+	@ApiOperation(value = "Desassocia um profissional de um estabelecimento")
+	public ResponseEntity<Void> desassociar(@PathVariable Long id) {
+		log.debug("Requisição REST para desassociar o Profissional : {}", id);
+		profissionalService.desassociar(id);
+		return ResponseEntity.ok().build();
+	}
 	
 	@GetMapping("/estabelecimentos/{id}")
 	public ResponseEntity<Page<ProfissionalListagemDTO>> buscarPorIdEstabeleCimentoPaginado(@PathVariable Long id,@ApiParam Pageable pageable) {
